@@ -41,6 +41,9 @@ namespace BlueBooks
                 .AddEntityFrameworkStores<BlueBookDBContext>();
 
             services.AddTransient<IAuthorRepository, AuthorRepository>();
+            services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            
 
 
             services.AddAuthentication(option =>
@@ -80,7 +83,7 @@ namespace BlueBooks
             }
             app.UseAuthentication();
             app.UseMvc();
-            //DbInitializer.Seed(app);
+            DbInitializer.Seed(app).Wait();
 
         }
     }

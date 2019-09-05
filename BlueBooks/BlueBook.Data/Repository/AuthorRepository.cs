@@ -14,7 +14,8 @@ namespace BlueBook.Data.Repository
 
         public IEnumerable<Author> GetAllWithBooks()
         {
-            return _context.Authors.Include(a => a.Books);
+            return _context.Authors.
+                Include(a => a.Books);
         }
 
         public Author GetWithBooks(int id)

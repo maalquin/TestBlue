@@ -19,8 +19,8 @@ namespace BlueBook.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-           // builder.Entity<Book>();
-               
+            // builder.Entity<Book>();
+            
 
             // https://github.com/aspnet/EntityFrameworkCore/issues/3924
             // EF Core 2 doesnt support Cascade on delete for in Memory Database

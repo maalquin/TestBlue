@@ -8,8 +8,8 @@ namespace BlueBook.Data.Interfaces
 {
     public interface IBookRepository : IRepository<Book>
     {
-        IEnumerable<Book> GetAllWithAuthor();
+        IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> FindWithAuthor(Func<Book, bool> predicate);
-        IEnumerable<Book> FindWithAuthorAndBorrower(Func<Book, bool> predicate);
+       
     }
 }

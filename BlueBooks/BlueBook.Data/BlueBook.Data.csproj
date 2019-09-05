@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <Compile Remove="IdentityDbContext.cs" />
+    <Compile Remove="Migrations\20190905141913_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190905144216_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190905153717_InitialMigration.cs" />
+    <Compile Remove="Migrations\20190905154122_InitialMigration.cs" />
   </ItemGroup>
 
   <ItemGroup>

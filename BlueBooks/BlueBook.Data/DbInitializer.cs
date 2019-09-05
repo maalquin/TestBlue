@@ -12,60 +12,76 @@ namespace BlueBook.Data
 {
     public class DbInitializer
     {
-        public static void  Seed(IApplicationBuilder applicationBuilder)
+        public static async Task  Seed(IApplicationBuilder applicationBuilder)
         {
             BlueBookDBContext context = applicationBuilder.ApplicationServices.GetRequiredService<BlueBookDBContext>();
 
             UserManager<IdentityUser> userManager = applicationBuilder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
 
             RoleManager<IdentityRole> roleManager = applicationBuilder.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
-
-
-
-
-            // Add Lender
+            
+            
             var user = new IdentityUser() { UserName = "maalquin", Email = "maalquin@hotmail.com", EmailConfirmed = true };
-            userManager.CreateAsync(user, "%Quintero86*");
+
+
+            await userManager.CreateAsync(user, "%Quintero86*");
 
             if (roleManager.Roles.Count() == 0)
             {
                 var role = new IdentityRole("Admin");
-                roleManager.CreateAsync(role);
+                await roleManager.CreateAsync(role);
                 
             }
 
-            //var adminUser = userManager.FindByNameAsync("maalquin").Result;
-            //var rolex = roleManager.FindByNameAsync("Admin").Result;
-            
-
-            //userManager.AddToRoleAsync(adminUser,rolex.Name);
 
 
 
-            // Add Author
-            var authorDeErnest = new Author
+            if (context.Authors.Count() == 0)
             {
-                Name = "Ernest hemingway",
-                Books = new List<Book>()
+                //var catetoryOpera = new Category
+                //{
+                //    Id = 1,
+                //    Categoryname = "Novela"
+                //};
+                //var catetoryFiction = new Category
+                //{
+                //    Id = 2,
+                //    Categoryname = "Fiction"
+                //};
+                //var catetoryDrame = new Category
+                //{
+                //    Id = 3,
+                //    Categoryname = "Dramaturgy"
+                //};
+                
+                // Add Author
+                var authorDeErnest = new Author
                 {
-                    new Book { Title = "El viejo y el Mar" },
-                    new Book { Title = "Adios a las Armas" }
-                }
-            };
-
-            var authorGabo = new Author
-            {
-                Name = "Gabriel Garcia Marquez",
-                Books = new List<Book>()
+                    Name = "Ernest hemingway",
+                    Books = new List<Book>()
+ 
+                    
                 {
-                    new Book { Title = "Cien Años de Soledad"},
-                    new Book { Title = "El Coronel no tiene quien le "},
-                    new Book { Title = "La hojarasca"}
+                    new Book { Title = "El viejo y el Mar", Category = new Category() {  Categoryname = "Drama" } },
+                    new Book { Title = "Adios a las Armas", Category = new Category() {  Categoryname = "Opera" } }
                 }
-            };
+                };
 
-            context.Authors.Add(authorDeErnest);
-            context.Authors.Add(authorGabo);
+                var authorGabo = new Author
+                {
+                    Name = "Gabriel Garcia Marquez",
+                    Books = new List<Book>()
+                {
+                    new Book { Title = "Cien Años de Soledad", Category = new Category() { Categoryname = "Cuento" } },
+                    new Book { Title = "El Coronel no tiene quien le ", Category = new Category() {  Categoryname = "Soledad" } },
+                    new Book { Title = "La hojarasca", Category = new Category() { Categoryname = "Novela" }}
+                }
+                };
+
+        
+                context.Authors.Add(authorDeErnest);
+                context.Authors.Add(authorGabo);
+            }
 
             context.SaveChanges();
         }

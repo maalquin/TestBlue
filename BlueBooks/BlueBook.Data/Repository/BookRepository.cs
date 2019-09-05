@@ -15,19 +15,15 @@ namespace BlueBook.Data.Repository
         {
             return _context.Books
                 .Include(a => a.Author)
+                .Include(z => z.Category)
                 .Where(predicate);
         }
 
-        public IEnumerable<Book> FindWithAuthorAndBorrower(Func<Book, bool> predicate)
-        {
-            return _context.Books
-                .Include(a => a.Author)
-                .Where(predicate);
-        }
+      
 
-        public IEnumerable<Book> GetAllWithAuthor()
+        public IEnumerable<Book> GetAllBooks()
         {
-            return _context.Books.Include(a => a.Author);
+            return _context.Books.Include(a => a.Author).Include(a => a.Category);
         }
     }
 }
