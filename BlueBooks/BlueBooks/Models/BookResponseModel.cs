@@ -19,7 +19,7 @@ namespace BlueBooks.Models
     }
     public class CategoryResponseModel
     {
-        public int CategoryId { get; set; } 
-        public string CategoryName { get; set; }
+            public int CategoryId { get; set; } 
+            public string CategoryName { get; set; }
     }
 }

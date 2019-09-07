@@ -32,8 +32,12 @@ namespace BlueBooks
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-           
-           
+
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            }));
+
             services.AddDbContext<BlueBookDBContext>(options =>
            options.UseSqlServer(Configuration["Data:BookDBConection:ConnectionString"]));
 
@@ -66,6 +70,7 @@ namespace BlueBooks
             });
 
 
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             return services.BuildServiceProvider();
 
@@ -81,6 +86,9 @@ namespace BlueBooks
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("ApiCorsPolicy");
+
+
             app.UseAuthentication();
             app.UseMvc();
             DbInitializer.Seed(app).Wait();

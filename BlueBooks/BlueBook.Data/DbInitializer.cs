@@ -38,21 +38,6 @@ namespace BlueBook.Data
 
             if (context.Authors.Count() == 0)
             {
-                //var catetoryOpera = new Category
-                //{
-                //    Id = 1,
-                //    Categoryname = "Novela"
-                //};
-                //var catetoryFiction = new Category
-                //{
-                //    Id = 2,
-                //    Categoryname = "Fiction"
-                //};
-                //var catetoryDrame = new Category
-                //{
-                //    Id = 3,
-                //    Categoryname = "Dramaturgy"
-                //};
                 
                 // Add Author
                 var authorDeErnest = new Author

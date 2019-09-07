@@ -1,0 +1,42 @@
+<p>
+  Create Book
+</p>
+<form #formBookEdit="ngForm" autocomplete="off" (submit)="onSubmit(formBookEdit)">
+    <div class="form-group col-md-6">
+        <label>Author</label>
+      <select name="authorID" appSelectedValidator  #authorID="ngModel" [(ngModel)]="formData.authorID" class="form-control">
+    
+        <option value="-1">-Select-</option>
+        <option *ngFor="let author of authorList" value="{{author.authorID}}">{{author.authorName}}</option>
+    
+      </select>
+      <span class="m-form__help" *ngIf="authorID.touched && authorID.errors?.defaultSelected">
+        Author Is Required
+      </span>
+    </div>
+    <div class="form-group col-md-6" [class.has-error]="categoryId.touched && categoryId.invalid">
+        <label>Categories</label>
+        <select name="categoryId" appSelectedValidator  #categoryId="ngModel" [(ngModel)]="formData.categoryId" class="form-control">
+    
+          <option value="-1">-Select-</option>
+          <option *ngFor="let category of categoryList" value="{{category.categoryId}}">{{category.categoryName}}</option>
+    
+        </select>
+        <span class="m-form__help" *ngIf="categoryId.touched && categoryId.errors?.defaultSelected">
+          Category is Required
+        </span>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Name</label>
+      <input type="text" name="title" #title="ngModel" [(ngModel)]="formData.title" class="form-control" required>
+       <div *ngIf="title.invalid && (title.dirty || title.touched)">
+         <p *ngIf="title.hasError('required')">
+           Tittle Book is required
+         </p>
+       </div>
+  </div>
+  <button type="submit" class="btn btn-dark" [disabled]="formBookEdit.invalid"><i class="fa fa-database"></i> Submit</button>
+  <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+</form>
+
+

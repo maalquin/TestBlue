@@ -1,0 +1,14 @@
+<form #formCategoryEdit="ngForm" autocomplete="off" (submit)="onSubmit(formCategoryEdit)">
+ 
+  <div class="form-group col-md-6">
+        <label>Category Name</label>
+        <input type="text" name="categoryName"  #categoryName="ngModel" [(ngModel)]="formData.categoryName" class="form-control" required>
+         <div *ngIf="categoryName.invalid && (categoryName.dirty || categoryName.touched)">
+           <p *ngIf="categoryName.hasError('required')">
+             Category Name is Required
+           </p>
+         </div>
+    </div>
+    <button type="submit" class="btn btn-dark" [disabled]="formCategoryEdit.invalid"><i class="fa fa-database"></i> Submit</button>
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+</form>

@@ -39,14 +39,14 @@ namespace BlueBooks.Controllers
                 
             }
 
-            if (_bookRepository.GetAll().Where(x => x.Title == bookRequest.Book.Title 
-                && x.AuthorId == bookRequest.Book.AuthorId).Any())
+            if (_bookRepository.GetAll().Where(x => x.Title == bookRequest.title 
+                && x.AuthorId == bookRequest.authorID).Any())
             {
                 return Content("The Book Title is in Database Already!");
             }
             else {
-                _bookRepository.Create(bookRequest.Book);
-                return Ok(bookRequest.Book);
+                _bookRepository.Create(bookRequest.toEntity());
+                return Ok(bookRequest);
             }
 
         }
@@ -67,17 +67,16 @@ namespace BlueBooks.Controllers
         public IActionResult Update(BookRequestModel bookRequest)
         {
           
-            Book book = _bookRepository.FindWithAuthor(a => a.BookId == bookRequest.Book.BookId).FirstOrDefault();
+            Book book = _bookRepository.FindWithAuthor(a => a.BookId == bookRequest.bookId).FirstOrDefault();
 
             if (book == null)
             {
                 return NotFound();
             }
 
-            book.Title = bookRequest.Book.Title;
-            book.Author = bookRequest.Book.Author;
-            book.AuthorId = bookRequest.Book.AuthorId;
-            book.CategoryId = bookRequest.Book.CategoryId;
+            book.Title = bookRequest.title;
+            book.AuthorId = bookRequest.authorID;
+            book.CategoryId = bookRequest.categoryId;
             _bookRepository.Update(book);
 
             return Ok();

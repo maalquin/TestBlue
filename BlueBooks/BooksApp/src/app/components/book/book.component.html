@@ -1,0 +1,49 @@
+<div class="row pt-2 pb-2">
+  <div class="col-sm-6">
+      <h4 class="page-title"><i class="fa fa-cube"></i> Library Books</h4>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"></li>
+          <li class="breadcrumb-item">Book</li>
+          <li class="breadcrumb-item active" aria-current="page">Books</li>
+      </ol>
+  </div>
+  <div class="col-sm-6">
+      <div class="btn-group group-round m-1 float-right">
+          <button type="button" class="btn btn-outline-secondary btn-sm waves-effect waves-light m-1" (click)="AddNewBook()">
+              <i class="fa fa-plus-circle">
+              </i> Add New Book
+          </button>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <table class="table table-borderless">
+    <thead class="thead-light">
+      <th>Book Id</th>
+      <th>Book Name</th>
+      <th>Author Name</th>
+      <th>Category Name</th>
+    </thead>
+    <tbody>
+      <tr *ngIf="booksList.length == 0" [class.text-danger]="!isValid && booksList">
+        <td class="font-italic text-center" colspan="5">
+         Any Books in Database!
+        </td>
+      </tr>
+
+      <tr *ngFor="let item of booksList;let i=index;">
+        <td>{{item.bookId}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.author.authorName}}</td>
+        <td>{{item.category.categoryName}}</td>
+        <td>
+          <a class="btn btn-sm btn-info text-white" (click)="AddOrEditPolicyItems(i,service.formData.PolicyId)"><i class="fa fa-pencil"></i></a>
+         
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>
+
+
+

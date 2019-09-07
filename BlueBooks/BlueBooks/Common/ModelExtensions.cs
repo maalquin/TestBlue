@@ -40,6 +40,24 @@ namespace BlueBooks.Common
                 CategoryName = category.Categoryname
             };
         }
+        public static Book toEntity(this BookRequestModel bookRequest)
+        {
+            return new Book()
+            {
+                CategoryId = bookRequest.categoryId,
+                Title = bookRequest.title,
+                AuthorId = bookRequest.authorID,
+                BookId = bookRequest.bookId
+            };
+        }
+        public static Category toEntity(this CategoryCreateModel categoryCreate)
+        {
+            return new Category()
+            {
+                Categoryname = categoryCreate.categoryName,
+                Id = categoryCreate.categoryID.Value
+            };
+        }
 
 
     }

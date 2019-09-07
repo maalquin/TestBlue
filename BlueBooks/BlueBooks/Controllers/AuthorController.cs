@@ -88,7 +88,7 @@ namespace BlueBooks.Controllers
         public IActionResult GetAuthors(int? authorId)
         {
             var authors = new List<Author>();
-            if (authors == null)
+            if (authorId == 0)
             {
                 authors = _authorRepository.GetAll().ToList();
             }
